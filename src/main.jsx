@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import LoginPage from './page/login'
-import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,7 +12,7 @@ import ProductPage from './page/products'
 const router = createBrowserRouter([
   {
     path: "/home",
-    element: <App/>
+    element: <div>This is home page of HuuDung</div>
   },
   {
     path: "/login",
