@@ -27,7 +27,7 @@ const App = () => {
                     <TodoNew addNewTodo={addNewTodo}></TodoNew>
                     {todoList.length === 0 ?
                         <div>Nothing is here</div>:
-                        <TodoList name={HuuDung} age={age} todoList={todoList}></TodoList>
+                        <TodoList setTodoList={setTodoList} todoList={todoList}></TodoList>
                     }
                     
             </>

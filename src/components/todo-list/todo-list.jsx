@@ -1,18 +1,21 @@
 const TodoList = (props) =>{
-    console.log('ready to check props ' + JSON.stringify(props))
-
+    const {todoList, setTodoList} = props
+    const handleDelete = (id) => {
+        // console.log(`this is id to remove ${id} and ${JSON.stringify()}`)
+        setTodoList(todoList.filter(e => e.id !== id))
+    }
 
 console.log(props.todoList)
     return (
         <>
             <div>
                 <ul>
-                   {props.todoList.map((item, index) =>{
+                   {todoList.map((item, index) =>{
                         return (
                             
                                 <div className={`todo-item`} key={item.id}>
                                     <div>{item.name} and {item.id}</div>
-                                    <button>Delete</button>
+                                    <button onClick={(id) => handleDelete(item.id)}>Delete</button>
                                 </div>
                             
                         )
