@@ -4,8 +4,8 @@ import TodoList  from './components/todo-list/todo-list'
 const HuuDung = "Tran Huu Dung";
 const age = 22;
 
-const addNewFuncton = () => {
-        console.log("call me")
+const addNewFuncton = (name) => {
+        console.log("call me " + name)
 }
 const App = () => {
     return (

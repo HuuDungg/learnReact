@@ -1,11 +1,17 @@
 const TodoNew = ({addNewFuncton}) => {
-   addNewFuncton()
+
+    const handleOnChange = (name) => {
+        console.log(`you are early change data in text ${name}`)
+    }
+
     return (
         <>
             <div className="todo-input">
                 <label htmlFor="">Input your todo</label>
-                <input type="text" />
-                <button>Save</button>
+                <input type="text" onChange={(event) => handleOnChange(event.target.value)}/>
+                <button 
+                onClick={addNewFuncton}
+                >Save</button>
             </div>
         </>
     );
