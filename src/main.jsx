@@ -8,10 +8,14 @@ import {
 import SigninPage from './page/signin'
 import UserPage from './page/users'
 import ProductPage from './page/products'
-import Header from './layout/header';
-import Footer from './layout/footer';
+import ErrorPage from './page/error';
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>This is home page of HuuDung</div>,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/home",
     element: <div>This is home page of HuuDung</div>
