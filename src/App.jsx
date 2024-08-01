@@ -25,7 +25,11 @@ const App = () => {
             <>
                     <TodoTitle></TodoTitle>
                     <TodoNew addNewTodo={addNewTodo}></TodoNew>
-                    <TodoList name={HuuDung} age={age} todoList={todoList}></TodoList>
+                    {todoList.length === 0 ?
+                        <div>Nothing is here</div>:
+                        <TodoList name={HuuDung} age={age} todoList={todoList}></TodoList>
+                    }
+                    
             </>
     )
 }
