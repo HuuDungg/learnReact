@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 const Header = () =>{
     return(
         <>
@@ -8,12 +8,12 @@ const Header = () =>{
                     <a className="navbar-brand" href="#">WebSiteName</a>
                     </div>
                     <ul className="nav navbar-nav">
-                        <li ><Link className="active" to='/home' >Home</Link></li>
-                        <li ><Link className="active" to='/users' >user</Link></li>
+                        <li ><NavLink className="active" to='/home' >Home</NavLink></li>
+                        <li ><NavLink className="active" to='/users' >user</NavLink></li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
-                        <li><Link to='/users/signin'><span className="glyphicon glyphicon-user"></span> Sign Up</Link></li>
-                        <li><Link to='/users/login'><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>
+                        <li><NavLink to='/users/signin'><span className="glyphicon glyphicon-user"></span> Sign in</NavLink></li>
+                        <li><NavLink to='/users/login'><span className="glyphicon glyphicon-log-in"></span> Login</NavLink></li>
                     </ul>
                 </div>
             </nav>

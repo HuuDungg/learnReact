@@ -1,7 +1,7 @@
 const SigninPage = () =>{
     return (
         <>
-            <div>this is login nha</div>
+            <div>this is signin nha</div>
         </>
     )
 }
