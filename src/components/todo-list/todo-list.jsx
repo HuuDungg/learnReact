@@ -2,6 +2,7 @@ const TodoList = (props) =>{
     console.log('ready to check props ' + JSON.stringify(props))
 
 
+console.log(props.todoList)
     return (
         <>
             <div>
