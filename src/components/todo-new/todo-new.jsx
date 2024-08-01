@@ -1,4 +1,5 @@
-const TodoNew = () => {
+const TodoNew = ({addNewFuncton}) => {
+   addNewFuncton()
     return (
         <>
             <div className="todo-input">

@@ -3,11 +3,15 @@ import TodoNew  from './components/todo-new/todo-new'
 import TodoList  from './components/todo-list/todo-list'
 const HuuDung = "Tran Huu Dung";
 const age = 22;
+
+const addNewFuncton = () => {
+        console.log("call me")
+}
 const App = () => {
     return (
             <>
                     <TodoTitle></TodoTitle>
-                    <TodoNew></TodoNew>
+                    <TodoNew addNewFuncton={addNewFuncton}></TodoNew>
                     <TodoList name={HuuDung} age={age}></TodoList>
             </>
     )
