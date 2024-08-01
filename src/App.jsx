@@ -5,10 +5,6 @@ import { useState } from 'react';
 const HuuDung = "Tran Huu Dung";
 const age = 22;
 
-const addNewFuncton = (name) => {
-        console.log("call me " + name)
-}
-
 
 const App = () => {
         const [todoList, setTodoList] = useState([
@@ -16,10 +12,19 @@ const App = () => {
                 {id: 2, name: "learn java" },
                 {id: 3, name: "learn python" }
         ])
+
+        const addNewTodo = (name) => {
+                const newTodo = {
+                        id: 3,
+                        name, name
+                }
+                setTodoList([...todoList, newTodo])
+        }
+        
     return (
             <>
                     <TodoTitle></TodoTitle>
-                    <TodoNew addNewFuncton={addNewFuncton}></TodoNew>
+                    <TodoNew addNewTodo={addNewTodo}></TodoNew>
                     <TodoList name={HuuDung} age={age} todoList={todoList}></TodoList>
             </>
     )

@@ -9,7 +9,7 @@ console.log(props.todoList)
                 <ul>
                     <li>{props.name}</li>
                     <li>{props.age}</li>
-                    <li>dfsfds</li>
+                    <li>{JSON.stringify(props.todoList)}</li>
                 </ul>
             </div>
         </>

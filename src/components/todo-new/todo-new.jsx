@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TodoNew = ({addNewFuncton}) => {
+const TodoNew = ({addNewTodo}) => {
     let valueInput = ''
     const [myInput, handleInput] = useState("Huu Dung")
     const handleOnChange = (name) => {
@@ -10,7 +10,7 @@ const TodoNew = ({addNewFuncton}) => {
 
     const handleClick = () =>{
         console.log("early click " + myInput)
-        let valueInput = myInput
+        addNewTodo(myInput)
     }
 
     
