@@ -7,9 +7,13 @@ console.log(props.todoList)
         <>
             <div>
                 <ul>
-                    <li>{props.name}</li>
-                    <li>{props.age}</li>
-                    <li>{JSON.stringify(props.todoList)}</li>
+                   {props.todoList.map((item, index) =>{
+                        return (
+                            <>
+                                <li>{item.name} and {index} <a href="">Delete</a></li>
+                            </>
+                        )
+                   })}
                 </ul>
             </div>
         </>

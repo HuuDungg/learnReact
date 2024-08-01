@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const TodoNew = ({addNewTodo}) => {
     let valueInput = ''
-    const [myInput, handleInput] = useState("Huu Dung")
+    const [myInput, handleInput] = useState()
     const handleOnChange = (name) => {
         console.log(`you are early change data in text ${name}`)
         handleInput(name)
@@ -11,6 +11,7 @@ const TodoNew = ({addNewTodo}) => {
     const handleClick = () =>{
         console.log("early click " + myInput)
         addNewTodo(myInput)
+        handleInput("") 
     }
 
     
@@ -19,7 +20,10 @@ const TodoNew = ({addNewTodo}) => {
         <>
             <div className="todo-input">
                 <label htmlFor="">Input your todo</label>
-                <input type="text" onChange={(event) => handleOnChange(event.target.value)}/>
+                <input type="text"
+                 onChange={(event) => handleOnChange(event.target.value)}
+                 value={myInput}
+                 />
                 <a 
                 onClick={handleClick}
                 >Save</a>
