@@ -15,7 +15,7 @@ const App = () => {
 
         const addNewTodo = (name) => {
                 const newTodo = {
-                        id: 3,
+                        id: Number(Math.random(1,9999)),
                         name, name
                 }
                 setTodoList([...todoList, newTodo])

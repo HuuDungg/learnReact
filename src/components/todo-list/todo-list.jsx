@@ -9,9 +9,12 @@ console.log(props.todoList)
                 <ul>
                    {props.todoList.map((item, index) =>{
                         return (
-                            <>
-                                <li>{item.name} and {index} <a href="">Delete</a></li>
-                            </>
+                            
+                                <div className={`todo-item`} key={item.id}>
+                                    <div>{item.name} and {item.id}</div>
+                                    <button>Delete</button>
+                                </div>
+                            
                         )
                    })}
                 </ul>
