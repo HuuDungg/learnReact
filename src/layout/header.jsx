@@ -12,8 +12,8 @@ const Header = () =>{
                         <li ><Link className="active" to='/users' >user</Link></li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
-                        <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><Link to='/users/signin'><span className="glyphicon glyphicon-user"></span> Sign Up</Link></li>
+                        <li><Link to='/users/login'><span className="glyphicon glyphicon-log-in"></span> Login</Link></li>
                     </ul>
                 </div>
             </nav>
