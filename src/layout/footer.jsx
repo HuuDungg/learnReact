@@ -1,7 +1,7 @@
 const Footer = () =>{
     return(
         <>
-            <div class="footer">
+            <div className="footer">
                 <p>Dung learnig reactjs</p>
             </div>
         </>

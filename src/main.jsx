@@ -8,6 +8,8 @@ import {
 import SigninPage from './page/signin'
 import UserPage from './page/users'
 import ProductPage from './page/products'
+import Header from './layout/header';
+import Footer from './layout/footer';
 
 const router = createBrowserRouter([
   {
@@ -15,26 +17,28 @@ const router = createBrowserRouter([
     element: <div>This is home page of HuuDung</div>
   },
   {
-    path: "/login",
-    element: <LoginPage/>
-  },
-  {
-    path: "/signin",
-    element: <SigninPage></SigninPage>
-  },
-  {
     path: "/users",
-    element: <UserPage></UserPage>
+    element: <UserPage></UserPage>,
+    children:[
+      {
+        path: "/users/login",
+        element: <LoginPage/>
+      },
+      {
+        path: "/users/signin",
+        element: <SigninPage></SigninPage>
+      }
+    ]
   },
   {
     path: "/products",
     element: <ProductPage></ProductPage>
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+        <RouterProvider router={router} />
   </React.StrictMode>,
 )
 

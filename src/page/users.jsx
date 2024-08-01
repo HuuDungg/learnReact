@@ -1,7 +1,12 @@
+import { Outlet } from 'react-router-dom';
+import Header from '../layout/header';
+import Footer from '../layout/footer';
 const UserPage = () =>{
     return(
         <>
-            <div>this is user page nhe</div>
+            <Header></Header>
+            <Outlet></Outlet>
+            <Footer></Footer>
         </>
     )
 }
