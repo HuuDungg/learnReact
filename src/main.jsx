@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import LoginPage from './page/login'
+import LoginPage from './components/page/login'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import SigninPage from './page/signin'
-import UserPage from './page/users'
-import ProductPage from './page/products'
-import ErrorPage from './page/error';
+import SigninPage from './components/page/signin'
+import UserPage from './components/page/users'
+import BookPage from './components/page/book'
+import ErrorPage from './components/page/error';
 
 const router = createBrowserRouter([
   {
@@ -17,30 +17,24 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/home",
-    element: <div>This is home page of HuuDung</div>
-  },
-  {
     path: "/users",
-    element: <UserPage></UserPage>,
-    children:[
-      {
-        index: true,
-        element: <UserPage></UserPage>
-      },
-      {
-        path: "/users/login",
-        element: <LoginPage/>
-      },
-      {
-        path: "/users/signin",
-        element: <SigninPage></SigninPage>
-      }
-    ]
+    element: <UserPage></UserPage>
   },
   {
-    path: "/products",
-    element: <ProductPage></ProductPage>
+    path: "/books",
+    element: <BookPage></BookPage>
+  },
+  {
+    index: true,
+    element: <UserPage></UserPage>
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>
+  },
+  {
+    path: "/signin",
+    element: <SigninPage></SigninPage>
   }
 ]);
 
