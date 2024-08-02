@@ -12,7 +12,12 @@ const UserForm = () => {
            if(status.data){
             notification.success({
                 message: "Create successfuly",
-                description:"Be done"
+                description: "create ok"
+            })
+           }else{
+            notification.error({
+                message: "Something went wrong",
+                description: JSON.stringify(status)
             })
            }
            console.log(`check status ${JSON.stringify(status)}` )
