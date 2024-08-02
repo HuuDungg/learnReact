@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
-import axios from 'axios';
+import { Button, Checkbox, Descriptions, Form, Input, message, notification } from 'antd';
+import { createUserApi } from '../../service/api.service';
 const UserForm = () => {
     const [fullName, setFullName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
-   const handleClickButton = () =>{
-        const URL_BACKEND = 'http://localhost:8080/api/v1/user'
-        axios.post(URL_BACKEND, {fullName, email, password, phone})
+   const handleClickButton = async () =>{
+           const status = await createUserApi(fullName, email, password, phone)
+           
+           if(status.data){
+            notification.success({
+                message: "Create successfuly",
+                description:"Be done"
+            })
+           }
+           console.log(`check status ${JSON.stringify(status)}` )
    }
     return(
         <>
