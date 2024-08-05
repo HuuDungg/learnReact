@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Space, Table, Popconfirm, Drawer, message} from 'antd';
+import React, { useState } from 'react';
+import { Space, Table, Popconfirm, Drawer, message, Button} from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateModal from './update.userModal';
 import { deleteUserApi } from '../../service/api.service'; 
@@ -30,6 +30,7 @@ const UserTable = (props) =>{
           {
             setDrawerDetail(true)
             setDataDetail(record)
+            console.log('user detail is: ', record)
           }
         }>{record._id}</a>
         } 
@@ -83,11 +84,16 @@ const UserTable = (props) =>{
       setDataUpdate={setDataUpdate}
       loadUser={loadUser}
       />
-      <Drawer title="User detail" onClose={()=>{setDrawerDetail(false)}} open={drawerDetail}>
+      <Drawer title="User detail" onClose={()=>{setDrawerDetail(false)}} open={drawerDetail} >
             <p><strong>ID:</strong> {dataDetail._id}</p>
             <p><strong>Email:</strong> {dataDetail.email}</p>
             <p><strong>Full name:</strong> {dataDetail.fullName}</p>
             <p><strong>Phone:</strong> {dataDetail.phone}</p>
+            <img width={'150px'} src={import.meta.env.VITE_IMAGE_URL + dataDetail.avatar} alt="hihi" /> <br />
+            <label  htmlFor='btnUpload'>Change avatar</label>
+            <input type="file" style={{
+              display: 'none'
+            }} id='btnUpload'/>
       </Drawer>
       
     </>

@@ -17,7 +17,6 @@ const UpdateModal = (props) =>{
        }
 
     useEffect(()=>{
-        console.log("check data update ", dataUpdate)
         setFullName(dataUpdate.fullName)
         setId(dataUpdate._id)
         setPhone(dataUpdate.phone)
