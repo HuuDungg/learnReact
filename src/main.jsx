@@ -25,10 +25,6 @@ const router = createBrowserRouter([
     element: <BookPage></BookPage>
   },
   {
-    index: true,
-    element: <UserPage></UserPage>
-  },
-  {
     path: "/login",
     element: <LoginPage/>
   },

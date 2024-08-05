@@ -1,25 +1,33 @@
-import { Link, NavLink } from "react-router-dom"
+import React, { useState } from 'react';
+import { UserOutlined, HomeOutlined, BookOutlined} from '@ant-design/icons';
+import { Menu } from 'antd';
+import { Link } from 'react-router-dom';
 const Header = () =>{
-    return(
-        <>
-            <nav className="navbar navbar-inverse">
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                    <a className="navbar-brand" href="#">WebSiteName</a>
-                    </div>
-                    <ul className="nav navbar-nav">
-                        <li ><NavLink className="active" to='/' >Home</NavLink></li>
-                        <li ><NavLink className="active" to='/users' >User</NavLink></li>
-                        <li ><NavLink className="active" to='/books' >Book</NavLink></li>
-                    </ul>
-                    <ul className="nav navbar-nav navbar-right">
-                        <li><NavLink to='/signin'><span className="glyphicon glyphicon-user"></span> Sign in</NavLink></li>
-                        <li><NavLink to='/login'><span className="glyphicon glyphicon-log-in"></span> Login</NavLink></li>
-                    </ul>
-                </div>
-            </nav>
-        </>
-    )
+    const items = [
+        {
+          label: <Link to={'/'}>Home</Link>,
+          key: 'Home',
+          icon: <HomeOutlined />,
+        },
+        {
+          label: <Link to={'/users'}>User</Link>,
+          key: 'User',
+          icon: <UserOutlined />,
+        },
+        {
+            label: <Link to={'/books'}>Book</Link>,
+            key: 'Book',
+            icon: <BookOutlined />,
+          },
+        
+      ];
+
+    const [current, setCurrent] = useState('');
+    const onClick = (e) => {
+        console.log('click ', e);
+        setCurrent(e.key);
+    };
+  return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
 }
 
 export default Header
