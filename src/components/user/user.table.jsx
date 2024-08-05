@@ -19,15 +19,19 @@ const UserTable = () =>{
     },
 ];
 
-  useEffect(()=>{
-    loadUser();
-  }, [])
+  useEffect(() =>{
+    loadUser()
+  },[])
 
   const loadUser = async() =>{
     const dat = await fetchAllUser()
     console.log("this is data ", dat)
     setDataUsers(dat.data)
   }
+
+  // loadUser()
+
+  // console.log("test data ", JSON.stringify(fetchAllUser()))
   
   return <Table columns={columns} dataSource={dataUsers} rowKey={'_id'} />;
 } 

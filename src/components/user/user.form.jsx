@@ -1,30 +1,47 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Descriptions, Form, Input, message, notification } from 'antd';
-import { createUserApi, fetchAllUser } from '../../service/api.service';
+import { Button, Input, notification, Modal } from 'antd';
+import { createUserApi } from '../../service/api.service';
 const UserForm = () => {
     const [fullName, setFullName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
-   const handleClickButton = async () =>{
-           const status = await createUserApi(fullName, email, password, phone)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+   const handleClickButton = () =>{
+        setIsModalOpen(true)
+   }
+   const handleCreate = async () => {
+    const status = await createUserApi(fullName, email, password, phone)
            
-           if(status.data){
-            notification.success({
-                message: "Create successfuly",
-                description: "create ok"
-            })
-           }else{
-            notification.error({
-                message: "Something went wrong",
-                description: JSON.stringify(status)
-            })
-           }
-           console.log(`check status ${JSON.stringify(status)}` )
+    if(status.data){
+     notification.success({
+         message: "Create successfuly",
+         description: "create ok"
+     })
+    }else{
+     notification.error({
+         message: "Something went wrong",
+         description: JSON.stringify(status)
+     })
+    }
+    console.log(`check status ${JSON.stringify(status)}` )
+    setIsModalOpen(false)
    }
     return(
         <>
         <div>
+
+            <Button
+            onClick={handleClickButton}
+            type="primary" htmlType="submit">
+                Create
+            </Button>
+            <Modal title="Basic Modal" 
+            open={isModalOpen} 
+            onOk={() => handleCreate()} 
+            onCancel={() => setIsModalOpen(false)}
+            maskClosable={false}
+            >
             <div>
                 <span>Full name</span>
                 <Input
@@ -53,11 +70,7 @@ const UserForm = () => {
                 onChange={(event) => {setPhone(event.target.value)}}
                 />
             </div>
-            <Button
-            onClick={handleClickButton}
-            type="primary" htmlType="submit">
-                Submit
-            </Button>
+            </Modal>
         </div>
         </>
     )
