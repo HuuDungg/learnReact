@@ -18,8 +18,12 @@ const updateUserApi = (fullName, _id, phone) =>{
         fullName: fullName,
         phone: phone
     }
-    console.log('check data before update ', JSON.stringify(data))
     return axios.put(URL_BACKEND, data)
+}
+
+const deleteUserApi = (_id) =>{
+    const URL_BACKEND = '/api/v1/user/' + _id
+    return axios.delete(URL_BACKEND)
 }
 
 const fetchAllUser = () =>{
@@ -27,4 +31,4 @@ const fetchAllUser = () =>{
     return axios.get(URL_BACKEND)
 }
 
-export{createUserApi, fetchAllUser, updateUserApi}
+export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi}

@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Space, Table, Popconfirm, Drawer, message} from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateModal from './update.userModal';
-import { Drawer } from 'antd';
+import { deleteUserApi } from '../../service/api.service'; 
 const UserTable = (props) =>{
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
   const [dataUpdate, setDataUpdate] = useState([null])
   const {dataUsers, loadUser} = props
   const [drawerDetail, setDrawerDetail] = useState(false)
   const [dataDetail, setDataDetail] = useState([null])
+  const [userDelete, setUserDelete] = useState(null)
+  const confirm = async (e) => {
+    message.success('Click on Yes');
+    await deleteUserApi(userDelete)
+    console.log('the id is delete ', userDelete)
+    loadUser()
+  };
+  const cancel = (e) => {
+    message.error('Click on No');
+  };
+
   const columns = [
     {
         title: 'ID',
@@ -44,7 +55,17 @@ const UserTable = (props) =>{
             setDataUpdate(record)
           }}
           />
-          <DeleteOutlined />
+          <Popconfirm
+            title="Delete the user"
+            description="Are you sure to delete this user?"
+            onConfirm={() => {confirm()}}
+            onCancel={() => {cancel()}}
+            okText="Yes"
+            cancelText="No"
+          >
+            <DeleteOutlined onClick={() => setUserDelete(record._id)}/>
+        </Popconfirm>
+          
           
         </Space>
         </>
@@ -67,7 +88,8 @@ const UserTable = (props) =>{
             <p><strong>Email:</strong> {dataDetail.email}</p>
             <p><strong>Full name:</strong> {dataDetail.fullName}</p>
             <p><strong>Phone:</strong> {dataDetail.phone}</p>
-          </Drawer>
+      </Drawer>
+      
     </>
   )
 } 
