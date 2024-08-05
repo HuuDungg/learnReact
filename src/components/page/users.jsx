@@ -19,7 +19,7 @@ const UserPage = () =>{
         <>
             <Header></Header>
             <UserForm loadUser={loadUser}></UserForm>
-            <UserTable dataUsers={dataUsers}></UserTable>
+            <UserTable loadUser={loadUser} dataUsers={dataUsers}></UserTable>
             <Footer></Footer>
         </>
     )

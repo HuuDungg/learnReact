@@ -3,8 +3,9 @@ import { Space, Table, Tag } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateModal from './update.userModal';
 const UserTable = (props) =>{
-  
-  const {dataUsers} = props
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
+  const [dataUpdate, setDataUpdate] = useState([null])
+  const {dataUsers, loadUser} = props
 
   const columns = [
     {
@@ -27,19 +28,28 @@ const UserTable = (props) =>{
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <EditOutlined />
+          <EditOutlined
+          
+          onClick={()=>{
+            setIsModalUpdateOpen(true)
+            setDataUpdate(record)
+          }}
+          />
           <DeleteOutlined />
         </Space>
       ),
     },
-];
-
-
-  
+];  
   return (
     <>
       <Table columns={columns} dataSource={dataUsers} rowKey={'_id'} />
-      <UpdateModal/>
+      <UpdateModal 
+      isModalUpdateOpen={isModalUpdateOpen}
+      setIsModalUpdateOpen={setIsModalUpdateOpen}
+      dataUpdate={dataUpdate}
+      setDataUpdate={setDataUpdate}
+      loadUser={loadUser}
+      />
     </>
   )
 } 

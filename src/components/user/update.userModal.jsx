@@ -1,29 +1,35 @@
 import { Button, Input, notification, Modal } from 'antd';
-import { createUserApi } from '../../service/api.service';
-import { useState } from 'react';
-const UpdateModal = () =>{
-    const [fullName, setFullName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState("")
+import { updateUserApi } from '../../service/api.service';
+import { useEffect, useState } from 'react';
+const UpdateModal = (props) =>{
+    const {isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate, loadUser} = props
+
+    const [fullName, setFullName] = useState("")
+    const [id, setId] = useState("")
     const [phone, setPhone] = useState("")
-    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const closeAndRefresh = () =>{
-        setIsModalOpen(false)
+        setIsModalUpdateOpen(false)
         setFullName("")
-        setEmail("")
-        setPassword("")
+        setId("")
         setPhone("")
         loadUser()
        }
+
+    useEffect(()=>{
+        console.log("check data update ", dataUpdate)
+        setFullName(dataUpdate.fullName)
+        setId(dataUpdate._id)
+        setPhone(dataUpdate.phone)
+    }, [dataUpdate])
     
     const handleCreate = async () => {
-    const status = await createUserApi(fullName, email, password, phone)
+    const status = await updateUserApi(fullName, id, phone)
             
     if(status.data){
         closeAndRefresh()
         notification.success({
-            message: "Create successfuly",
+            message: "update successfuly",
             description: "create ok"
         })
     }else{
@@ -38,30 +44,24 @@ const UpdateModal = () =>{
     return(
         <>
             <Modal title="Form update" 
-                open={isModalOpen} 
+                open={isModalUpdateOpen} 
                 onOk={() => handleCreate()} 
-                onCancel={() => setIsModalOpen(false)}
+                onCancel={() => setIsModalUpdateOpen(false)}
                 maskClosable={false}
+                okText={'Save'}
                 >
+                <div>
+                    <span>Id</span>
+                    <Input
+                    value={id}
+                    disabled
+                    />
+                </div>
                 <div>
                     <span>Full name</span>
                     <Input
                     value={fullName}
                     onChange={(event) => {setFullName(event.target.value)}}
-                    />
-                </div>
-                <div>
-                    <span>Email</span>
-                    <Input
-                    value={email}
-                    onChange={(event) => {setEmail(event.target.value)}}
-                    />
-                </div>
-                <div>
-                    <span>Password</span>
-                    <Input.Password 
-                    value={password}
-                    onChange={(event) => {setPassword(event.target.value)}}
                     />
                 </div>
                 <div>
