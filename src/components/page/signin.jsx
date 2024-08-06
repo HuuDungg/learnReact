@@ -29,6 +29,10 @@ const SigninPage = () =>{
                     required: true,
                     message: 'Please input your username!',
                   },
+                  {
+                    type: "email",
+                    message: "please input a valid email"
+                  }
                 ]}
                 >
                     <Input></Input>
@@ -52,10 +56,11 @@ const SigninPage = () =>{
                   {
                     required: true,
                     message: 'Please input your password!',
+                    min:10
                   },
                 ]}
                 >
-                    <Input></Input>
+                    <Input.Password></Input.Password>
                 </Form.Item>
                 <Form.Item
                 label="Phone"
@@ -67,7 +72,7 @@ const SigninPage = () =>{
                   },
                 ]}
                 >
-                    <Input.Password></Input.Password>
+                    <Input></Input>
                 </Form.Item>
             </div>
             <Button onClick={()=>{firstForm.submit()}}>Register</Button>
