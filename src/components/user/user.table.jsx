@@ -7,7 +7,7 @@ import { deleteUserApi, handleUploadFile, updateAvatarUserApi } from '../../serv
 const UserTable = (props) =>{
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
   const [dataUpdate, setDataUpdate] = useState([null])
-  const {dataUsers, loadUser} = props
+  const {dataUsers, loadUser, total, current, pageSize, setPageSize, setCurrent} = props
   const [drawerDetail, setDrawerDetail] = useState(false)
   const [dataDetail, setDataDetail] = useState([null])
   const [userDelete, setUserDelete] = useState(null)
@@ -48,6 +48,11 @@ const onSelectFile = (e) => {
   const file = e.target.files[0];
   setSelectedFile(file);
 }
+
+const onChange = (pagination, filters, sorter, extra) => {
+  setCurrent(pagination.current)
+  setPageSize(pagination.pageSize)
+};
 
 const handleUpdateAvatar = async () =>{
   const resUpload = await handleUploadFile(selectedFile, 'avatar')
@@ -133,7 +138,21 @@ const handleUpdateAvatar = async () =>{
 ];  
   return (
     <>
-      <Table columns={columns} dataSource={dataUsers} rowKey={'_id'} />
+      <Table 
+      columns={columns} 
+      dataSource={dataUsers} 
+      rowKey={'_id'} 
+      pagination={
+        {
+        current: current,
+        pageSize: pageSize,
+        showSizeChanger: true,
+        total: total,
+        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+        } }
+
+      onChange={onChange}
+      />
       <UpdateModal 
       isModalUpdateOpen={isModalUpdateOpen}
       setIsModalUpdateOpen={setIsModalUpdateOpen}
