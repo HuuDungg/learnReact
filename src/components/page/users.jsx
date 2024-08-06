@@ -12,7 +12,7 @@ const UserPage = () =>{
 
     useEffect(() =>{
         loadUser()
-      },[])
+      },[current])
     
       const loadUser = async() =>{
         const dat = await fetchAllUser(current, pageSize)

@@ -50,8 +50,8 @@ const onSelectFile = (e) => {
 }
 
 const onChange = (pagination, filters, sorter, extra) => {
-  setCurrent(pagination.current)
-  setPageSize(pagination.pageSize)
+  if(+current != +pagination.pageSize){setCurrent(pagination.current)
+  setPageSize(pagination.pageSize)}
 };
 
 const handleUpdateAvatar = async () =>{
@@ -78,7 +78,7 @@ const handleUpdateAvatar = async () =>{
         render: (_, record, Index) => {
           return (
             <>
-              <p>{Index + 1}</p>
+              <p>{(Index + 1) + (current-1)*pageSize}</p>
             </>
           )
         } 
