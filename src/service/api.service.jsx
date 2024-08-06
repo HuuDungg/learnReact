@@ -53,6 +53,15 @@ const registerUserApi = (fullName, email, password, phone)=>{
     return axios.post(URL_BACKEND, data)
 }
 
+const loginUserApi = (email, password)=>{
+    const URL_BACKEND = '/api/v1/auth/login'
+    const data = {
+        username: email,
+        password: password
+    }
+    return axios.post(URL_BACKEND, data)
+}
+
 const handleUploadFile = (file, folder) =>{
     let config = {
         headers: {
@@ -70,4 +79,4 @@ const handleUploadFile = (file, folder) =>{
 }
 
 
-export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi, handleUploadFile, updateAvatarUserApi, registerUserApi}
+export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi, handleUploadFile, updateAvatarUserApi, registerUserApi, loginUserApi}

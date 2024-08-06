@@ -1,11 +1,21 @@
 import Header from "../layout/header"
 import Footer from "../layout/footer"
 import { Button, Input, Form, Row, Col, message } from "antd"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { loginUserApi } from "../../service/api.service"
 const LoginPage = () =>{
     const [loginForm] = Form.useForm()
-    const onFinish = (values) => {
+    const navigate = useNavigate()
+    const onFinish = async (values) => {
         console.log('Success:', values);
+        const res = await loginUserApi(values.email, values.password)
+
+        if(res.data){
+            message.success("login successfuly")
+            navigate('/users')
+        }else{
+            message.error("something went wrong")
+        }
       };
       const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
