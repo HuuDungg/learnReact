@@ -25,7 +25,7 @@ const Header = () =>{
           icon: <LoginOutlined />
         },
         {
-          label: <Link to={'/signin'}>Signin</Link>,
+          label: <Link to={'/register'}>Register</Link>,
           key: 'Signin',
           icon: <UserAddOutlined />
         },

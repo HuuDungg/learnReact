@@ -5,10 +5,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import SigninPage from './components/page/signin'
 import UserPage from './components/page/users'
 import BookPage from './components/page/book'
 import ErrorPage from './components/page/error';
+import RegisterPage from './components/page/register';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
     element: <LoginPage/>
   },
   {
-    path: "/signin",
-    element: <SigninPage></SigninPage>
+    path: "/register",
+    element: <RegisterPage></RegisterPage>
   }
 ]);
 
