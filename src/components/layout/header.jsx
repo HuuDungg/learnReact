@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserOutlined, HomeOutlined, BookOutlined} from '@ant-design/icons';
+import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 const Header = () =>{
@@ -15,10 +15,20 @@ const Header = () =>{
           icon: <UserOutlined />,
         },
         {
-            label: <Link to={'/books'}>Book</Link>,
-            key: 'Book',
-            icon: <BookOutlined />,
-          },
+          label: <Link to={'/books'}>Book</Link>,
+          key: 'Book',
+          icon: <BookOutlined />,
+        },
+        {
+          label: <Link to={'/login'}>Login</Link>,
+          key: 'Login',
+          icon: <LoginOutlined />
+        },
+        {
+          label: <Link to={'/signin'}>Signin</Link>,
+          key: 'Signin',
+          icon: <UserAddOutlined />
+        },
         
       ];
 

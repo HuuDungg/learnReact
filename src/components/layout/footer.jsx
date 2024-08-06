@@ -2,7 +2,7 @@ const Footer = () =>{
     return(
         <>
             <div className="footer">
-                <p className="textFooter">Dung learnig reactjs</p>
+                <p className="textFooter">Dung learning reactjs</p>
             </div>
         </>
     )
