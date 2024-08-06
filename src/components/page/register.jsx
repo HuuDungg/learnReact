@@ -1,10 +1,20 @@
 import Header from "../layout/header"
 import Footer from "../layout/footer"
-import { Button, Input, Form, Row, Col } from "antd"
+import { Button, Input, Form, Row, Col, message } from "antd"
+import { Link, useNavigate } from "react-router-dom"
+import { registerUserApi } from "../../service/api.service"
 const RegisterPage = () =>{
     const [firstForm] = Form.useForm()
-    const onFinish = (values) => {
-        console.log('Success:', values);
+    const navigate = useNavigate()
+    const onFinish = async (values) => {
+        console.log(values)
+        const res = await registerUserApi(values.fullName, values.email, values.password, values.phone)
+        if(res.data){
+            message.success("register successfuly")
+            navigate('/login')
+        }else{
+            message.error("something went wrong")
+        }
       };
       const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -91,6 +101,12 @@ const RegisterPage = () =>{
                         Register
                     </Button>
                     </div>
+                </Col>
+            </Row>
+
+            <Row justify={"center"}>
+                <Col xs={24} md={8}>
+                    <Link to={"/login"}>Login now</Link>
                 </Col>
             </Row>
 

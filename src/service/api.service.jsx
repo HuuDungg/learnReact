@@ -42,6 +42,17 @@ const fetchAllUser = (current, pageSize) =>{
     return axios.get(URL_BACKEND)
 }
 
+const registerUserApi = (fullName, email, password, phone)=>{
+    const URL_BACKEND = '/api/v1/user/register'
+    const data = {
+        fullName,
+        email,
+        password,
+        phone
+    }
+    return axios.post(URL_BACKEND, data)
+}
+
 const handleUploadFile = (file, folder) =>{
     let config = {
         headers: {
@@ -59,4 +70,4 @@ const handleUploadFile = (file, folder) =>{
 }
 
 
-export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi, handleUploadFile, updateAvatarUserApi}
+export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi, handleUploadFile, updateAvatarUserApi, registerUserApi}

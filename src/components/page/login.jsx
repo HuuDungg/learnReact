@@ -80,7 +80,7 @@ const LoginPage = () =>{
 
                         <Row justify={"center"}>
                             <Col xs={24} md={8}>
-                                <Link to={"/register"}>Sign Up now</Link>
+                                <Link to={"/register"}>Register now</Link>
                             </Col>
                         </Row>
                 </Form>
