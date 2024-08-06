@@ -3,19 +3,22 @@ import Footer from "../layout/footer"
 import { Button, Input, Form, Row, Col, message } from "antd"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUserApi } from "../../service/api.service"
+import { useState } from "react"
 const LoginPage = () =>{
     const [loginForm] = Form.useForm()
+    const [isLoading, setIsloading] = useState(false)
     const navigate = useNavigate()
     const onFinish = async (values) => {
+        setIsloading(true)
         console.log('Success:', values);
         const res = await loginUserApi(values.email, values.password)
-
         if(res.data){
             message.success("login successfuly")
             navigate('/users')
         }else{
             message.error("something went wrong")
         }
+        setIsloading(false)
       };
       const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -81,7 +84,9 @@ const LoginPage = () =>{
                         <Row justify={"center"}>
                             <Col xs={24} md={8}>
                                 <div>
-                                <Button type="primary" onClick={()=>{loginForm.submit()}}>
+                                <Button 
+                                loading={isLoading}
+                                type="primary" onClick={()=>{loginForm.submit()}}>
                                     Login
                                 </Button>
                                 </div>
