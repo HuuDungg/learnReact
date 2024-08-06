@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Space, Table, Popconfirm, Drawer, message, Button} from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateModal from './update.userModal';
-import { deleteUserApi } from '../../service/api.service'; 
+import { deleteUserApi, handleUploadFile, updateAvatarUserApi } from '../../service/api.service'; 
+
 const UserTable = (props) =>{
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
   const [dataUpdate, setDataUpdate] = useState([null])
@@ -10,17 +11,73 @@ const UserTable = (props) =>{
   const [drawerDetail, setDrawerDetail] = useState(false)
   const [dataDetail, setDataDetail] = useState([null])
   const [userDelete, setUserDelete] = useState(null)
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState()
+
+
   const confirm = async (e) => {
     message.success('Click on Yes');
     await deleteUserApi(userDelete)
     console.log('the id is delete ', userDelete)
     loadUser()
   };
+
   const cancel = (e) => {
     message.error('Click on No');
   };
 
+  useEffect(() => {
+  if (!selectedFile) {
+    setPreview(undefined);
+    return;
+  }
+
+  const objectUrl = URL.createObjectURL(selectedFile);
+  setPreview(objectUrl);
+
+  // Giải phóng bộ nhớ khi component bị unmount
+  return () => URL.revokeObjectURL(objectUrl);
+}, [selectedFile]);
+
+const onSelectFile = (e) => {
+  if (!e.target.files || e.target.files.length === 0) {
+    setSelectedFile(undefined);
+    return;
+  }
+
+  const file = e.target.files[0];
+  setSelectedFile(file);
+}
+
+const handleUpdateAvatar = async () =>{
+  const resUpload = await handleUploadFile(selectedFile, 'avatar')
+  if(resUpload.data){
+    message.success("upload sucessfuly")
+    const fileImage = await resUpload.data.fileUploaded
+
+    updateAvatarUserApi(fileImage, dataDetail._id, dataDetail.fullName, dataDetail.phone)
+    
+    setSelectedFile(null)
+    setDrawerDetail(false)
+    loadUser()
+  }else{
+    message.error("fail to upload")
+  }
+}
+
+  
+
   const columns = [
+    {
+        title: "Index",
+        render: (_, record, Index) => {
+          return (
+            <>
+              <p>{Index + 1}</p>
+            </>
+          )
+        } 
+    },
     {
         title: 'ID',
         dataIndex: '_id',
@@ -30,7 +87,7 @@ const UserTable = (props) =>{
           {
             setDrawerDetail(true)
             setDataDetail(record)
-            console.log('user detail is: ', record)
+
           }
         }>{record._id}</a>
         } 
@@ -89,11 +146,31 @@ const UserTable = (props) =>{
             <p><strong>Email:</strong> {dataDetail.email}</p>
             <p><strong>Full name:</strong> {dataDetail.fullName}</p>
             <p><strong>Phone:</strong> {dataDetail.phone}</p>
-            <img width={'150px'} src={import.meta.env.VITE_IMAGE_URL + dataDetail.avatar} alt="hihi" /> <br />
+            <img style={{
+              width: '150px',
+              height: '150px',
+              overflow: 'hidden'
+            }} src={import.meta.env.VITE_IMAGE_URL + dataDetail.avatar} alt="hihi" /> <br />
             <label  htmlFor='btnUpload'>Change avatar</label>
-            <input type="file" style={{
+            <input 
+            type="file" 
+            style={{
               display: 'none'
-            }} id='btnUpload'/>
+            }} id='btnUpload'
+            onChange={(event)=> onSelectFile(event)}
+            /> <br />
+            {selectedFile &&
+              <>
+                <img style={{
+              width: '150px',
+              height: '150px',
+              overflow: 'hidden'
+            }} src={preview} /> <br />
+            <Button
+              onClick={handleUpdateAvatar}
+            >Save</Button>
+              </> 
+            }
       </Drawer>
       
     </>
