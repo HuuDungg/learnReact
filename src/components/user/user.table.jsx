@@ -111,7 +111,9 @@ const handleUpdateAvatar = async () =>{
       render: (_, record) => (
         <>
         <Space size="middle">
-          <EditOutlined
+          <EditOutlined style={{
+            color:'gray'
+          }}
           
           onClick={()=>{
             setIsModalUpdateOpen(true)
@@ -126,7 +128,12 @@ const handleUpdateAvatar = async () =>{
             okText="Yes"
             cancelText="No"
           >
-            <DeleteOutlined onClick={() => setUserDelete(record._id)}/>
+            <DeleteOutlined 
+            onClick={() => setUserDelete(record._id)}
+            style={{
+              color:'red'
+            }}
+            />
         </Popconfirm>
           
           

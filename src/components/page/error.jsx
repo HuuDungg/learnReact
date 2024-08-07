@@ -6,7 +6,7 @@ export default function ErrorPage() {
 
     return (
         <Result
-    status="403"
+    status="404"
     title="Oops!"
     subTitle={error.message}
     extra={<Button type="primary"><Link to={'/users'}>Back Home</Link></Button>}

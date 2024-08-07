@@ -7,14 +7,19 @@ import { getAccountApi } from '../../service/api.service';
 const Header = () =>{
 
   const {user, setUser} = useContext(AuthContext);
+  const {isAppLoading, setIsAppLoading} = useContext(AuthContext)
   const loadCurrentUser = async ()=>{
     const res = await getAccountApi()
+    setIsAppLoading(false)
     if(res.data){
       setUser(res.data.user)
     }
+    console.log('check is loading ', isAppLoading)
+    
   }  
 
   useEffect(()=>{loadCurrentUser()}, [])
+  
     const items = [
         {
           label: <Link to={'/'}>Home</Link>,

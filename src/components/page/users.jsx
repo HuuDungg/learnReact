@@ -9,7 +9,7 @@ const UserPage = () =>{
     const [current, setCurrent] = useState(1)
     const [pageSize, setPageSize] = useState(8)
     const [total, setTotal] = useState(0)
-
+    
     useEffect(() =>{
         loadUser()
       },[current])
@@ -24,6 +24,7 @@ const UserPage = () =>{
         }
         
       }
+    
     return(
         <>
             <Header></Header>

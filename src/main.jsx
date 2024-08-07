@@ -10,6 +10,7 @@ import BookPage from './components/page/book'
 import ErrorPage from './components/page/error';
 import RegisterPage from './components/page/register';
 import { AuthWrapper } from './components/context/auth.context';
+import PrivateRoute from './components/page/private.route';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/books",
-    element: <BookPage></BookPage>
+    element:
+    <PrivateRoute>
+        <BookPage/>
+    </PrivateRoute>
+     
   },
   {
     path: "/login",
