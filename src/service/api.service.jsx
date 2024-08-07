@@ -79,5 +79,10 @@ const handleUploadFile = (file, folder) =>{
     return axios.post(URL_BACKEND, bodyFormData, config)
 }
 
+const getAccountApi = ()=>{
+    const URL_BACKEND = '/api/v1/auth/account'
+    return axios.get(URL_BACKEND)
+}
 
-export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi, handleUploadFile, updateAvatarUserApi, registerUserApi, loginUserApi}
+
+export{createUserApi, fetchAllUser, updateUserApi, deleteUserApi, handleUploadFile, updateAvatarUserApi, registerUserApi, loginUserApi, getAccountApi}

@@ -1,12 +1,20 @@
-import React, { Children, useContext, useState } from 'react';
+import React, { Children, useContext, useEffect, useState } from 'react';
 import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutlined, AliwangwangOutlined, LogoutOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
+import { getAccountApi } from '../../service/api.service';
 const Header = () =>{
 
   const {user, setUser} = useContext(AuthContext);
-    console.log('check render')
+  const loadCurrentUser = async ()=>{
+    const res = await getAccountApi()
+    if(res.data){
+      setUser(res.data.user)
+    }
+  }  
+
+  useEffect(()=>{loadCurrentUser()}, [])
     const items = [
         {
           label: <Link to={'/'}>Home</Link>,
