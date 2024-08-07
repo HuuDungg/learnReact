@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Drawer, Space, Table, Tag } from 'antd';
 import { useEffect, useState } from 'react';
-import { getAllBook } from '../../service/api.book';
+import { getAllBook, deleteById } from '../../service/api.book';
 import Link from 'antd/es/typography/Link';
+import { Button, message, Popconfirm } from 'antd';
 
 const TableBoook = () => {
   const [dataBook, setDataBook] = useState(null);
@@ -25,6 +26,18 @@ const TableBoook = () => {
             setPageSize(pagination.pageSize)}
       };
 
+      const handleDelete = async (id) =>{
+        const res = await deleteById(id)
+        fetchAllBook()
+        confirm()
+      }
+
+      const confirm = (e) => {
+        message.success('Click on Yes');
+      };
+      const cancel = (e) => {
+        message.error('Click on No');
+      };
 
   useEffect(() => {
     fetchAllBook();
@@ -87,7 +100,17 @@ const TableBoook = () => {
         return (
           <>
             <EditOutlined />
-            <DeleteOutlined />
+            <Popconfirm
+                title="Delete the task"
+                description="Are you sure to delete this task?"
+                onConfirm={()=>{handleDelete(record._id)}}
+                onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+            >
+                <DeleteOutlined />
+            </Popconfirm>
+            
           </>
         );
       },

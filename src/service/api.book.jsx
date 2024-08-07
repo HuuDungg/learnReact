@@ -5,4 +5,10 @@ const getAllBook = (current, pageSize)=>{
     return axios.get(URL_BACKEND);
 }
 
-export {getAllBook}
+const deleteById = (id)=>{
+    const URL_BACKEND = `/api/v1/book/${id}`
+    return axios.delete(URL_BACKEND)
+
+}
+
+export {getAllBook, deleteById}
