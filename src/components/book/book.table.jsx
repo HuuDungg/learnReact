@@ -6,15 +6,27 @@ import Link from 'antd/es/typography/Link';
 
 const TableBoook = () => {
   const [dataBook, setDataBook] = useState(null);
+    const [current, setCurrent] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
+    const [total, setTotal] = useState(0)
 
-  const fetchAllBook = async () => {
-    const res = await getAllBook();
-    setDataBook(res.data.result);
-  };
+    const fetchAllBook = async () => {
+        const res = await getAllBook(current, pageSize);
+        setDataBook(res.data.result);
+        setTotal(res.data.meta.total)
+    };
+
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log('check data onChange ', pagination)
+        if(+pageSize != +pagination.pageSize || +current != pagination.current){
+            setCurrent(pagination.current)
+            setPageSize(pagination.pageSize)}
+      };
+
 
   useEffect(() => {
     fetchAllBook();
-  }, []);
+  }, [current, pageSize]);
 
   const columns = [
     {
@@ -22,7 +34,7 @@ const TableBoook = () => {
       dataIndex: 'stt',
       key: 'stt',
       render: (_, record, index) => {
-        return <>{index + 1}</>;
+        return <>{(index + 1) + (pageSize*(current-1))}</>;
       },
     },
     {
@@ -86,7 +98,18 @@ const TableBoook = () => {
 
   return (
     <>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns}
+       dataSource={dataSource}
+       pagination={
+        {
+        current: current,
+        pageSize: pageSize,
+        showSizeChanger: true,
+        total: total,
+        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+        } }
+        onChange={onChange}
+       />
     </>
   );
 };
