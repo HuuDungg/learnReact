@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/auth.context';
 const Header = () =>{
+
+  const {user, setUser} = useContext(AuthContext);
+
     const items = [
         {
           label: <Link to={'/'}>Home</Link>,
