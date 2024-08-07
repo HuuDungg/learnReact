@@ -1,13 +1,14 @@
 import React, { Children, useContext, useEffect, useState } from 'react';
 import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutlined, AliwangwangOutlined, LogoutOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import { getAccountApi } from '../../service/api.service';
+import { getAccountApi, logoutApi } from '../../service/api.service';
 const Header = () =>{
 
   const {user, setUser} = useContext(AuthContext);
   const {isAppLoading, setIsAppLoading} = useContext(AuthContext)
+  const navigate = useNavigate()
   const loadCurrentUser = async ()=>{
     const res = await getAccountApi()
     setIsAppLoading(false)
@@ -19,6 +20,24 @@ const Header = () =>{
   }  
 
   useEffect(()=>{loadCurrentUser()}, [])
+
+  const handleLogout = async () =>{
+    const res = await logoutApi()
+    if(res.data){
+      localStorage.removeItem('access_token')
+      setUser(
+        {
+          email: "",
+          phone: "",
+          fullName: "",
+          role: "",
+          avatar: "",
+          id: ""
+      }
+      )
+      navigate('/login')
+    }
+  }
   
     const items = [
         {
@@ -47,7 +66,7 @@ const Header = () =>{
           icon: <AliwangwangOutlined />,
           children: [
           {
-          label: 'Đăng xuất',
+          label: <span onClick={()=>{handleLogout()}}>Đăng xuất</span>,
           key: 'logout',
           },
           ],
