@@ -5,7 +5,7 @@ import { getAllBook, deleteById } from '../../service/api.book';
 import Link from 'antd/es/typography/Link';
 import { Button, message, Popconfirm } from 'antd';
 
-const TableBoook = () => {
+const TableBoook = ({isFormCreate}) => {
   const [dataBook, setDataBook] = useState(null);
     const [current, setCurrent] = useState(1)
     const [pageSize, setPageSize] = useState(10)
@@ -41,7 +41,7 @@ const TableBoook = () => {
 
   useEffect(() => {
     fetchAllBook();
-  }, [current, pageSize]);
+  }, [current, pageSize, isFormCreate]);
 
   const columns = [
     {
@@ -99,7 +99,9 @@ const TableBoook = () => {
       render: (_, record) => {
         return (
           <>
-            <EditOutlined />
+            <EditOutlined style={{
+                marginRight: '15px'
+            }} />
             <Popconfirm
                 title="Delete the task"
                 description="Are you sure to delete this task?"

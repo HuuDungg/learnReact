@@ -11,4 +11,17 @@ const deleteById = (id)=>{
 
 }
 
-export {getAllBook, deleteById}
+const createBook = (title, author, price, quantity, genre)=>{
+    const data  = 
+    {
+        thumbnail: "NONE",
+        mainText: title,
+        author: author,
+        price: +price,
+        quantity: +quantity,
+        category: genre
+    };
+    const URL_BACKEND = '/api/v1/book'
+    axios.post(URL_BACKEND, data)
+}
+export {getAllBook, deleteById, createBook}
