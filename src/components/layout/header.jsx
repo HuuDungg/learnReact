@@ -6,7 +6,7 @@ import { AuthContext } from '../context/auth.context';
 const Header = () =>{
 
   const {user, setUser} = useContext(AuthContext);
-  console.log('check data user ', user)
+    console.log('check render')
     const items = [
         {
           label: <Link to={'/'}>Home</Link>,
