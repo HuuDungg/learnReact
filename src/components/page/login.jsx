@@ -3,17 +3,22 @@ import Footer from "../layout/footer"
 import { Button, Input, Form, Row, Col, message } from "antd"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUserApi } from "../../service/api.service"
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AuthContext } from "../context/auth.context"
 const LoginPage = () =>{
     const [loginForm] = Form.useForm()
     const [isLoading, setIsloading] = useState(false)
     const navigate = useNavigate()
+    const { user, setUser } = useContext(AuthContext)
     const onFinish = async (values) => {
         setIsloading(true)
-        console.log('Success:', values);
+        
         const res = await loginUserApi(values.email, values.password)
         if(res.data){
             message.success("login successfuly")
+            setUser(res.data.user)
+            console.log('check user data ', user)
+            localStorage.setItem('access_token', res.data.access_token)
             navigate('/users')
         }else{
             message.error("something went wrong")
