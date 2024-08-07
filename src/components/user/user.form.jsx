@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input, notification, Modal } from 'antd';
-import { createUserApi } from '../../service/api.service';
+import { createUserApi } from '../../service/api.user';
 const UserForm = (props) => {
     const [fullName, setFullName] = useState()
     const [email, setEmail] = useState()

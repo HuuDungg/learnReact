@@ -14,7 +14,6 @@ const PrivateRoute = (props)=>{
                     </>
                 ) 
     }else{
-        message.warning('please login')
         return(
             <>
                 <Header></Header>

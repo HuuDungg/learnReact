@@ -3,7 +3,7 @@ import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutline
 import { Menu } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import { getAccountApi, logoutApi } from '../../service/api.service';
+import { getAccountApi, logoutApi } from '../../service/api.user';
 const Header = () =>{
 
   const {user, setUser} = useContext(AuthContext);
@@ -15,7 +15,6 @@ const Header = () =>{
     if(res.data){
       setUser(res.data.user)
     }
-    console.log('check is loading ', isAppLoading)
     
   }  
 

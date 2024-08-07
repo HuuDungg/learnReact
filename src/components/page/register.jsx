@@ -2,7 +2,7 @@ import Header from "../layout/header"
 import Footer from "../layout/footer"
 import { Button, Input, Form, Row, Col, message } from "antd"
 import { Link, useNavigate } from "react-router-dom"
-import { registerUserApi } from "../../service/api.service"
+import { registerUserApi } from "../../service/api.user"
 const RegisterPage = () =>{
     const [firstForm] = Form.useForm()
     const navigate = useNavigate()

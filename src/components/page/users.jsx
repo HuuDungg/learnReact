@@ -1,4 +1,4 @@
-import { fetchAllUser } from '../../service/api.service';
+import { fetchAllUser } from '../../service/api.user';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
 import UserTable from '../user/user.table';

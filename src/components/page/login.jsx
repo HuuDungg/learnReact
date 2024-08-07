@@ -2,7 +2,7 @@ import Header from "../layout/header"
 import Footer from "../layout/footer"
 import { Button, Input, Form, Row, Col, message } from "antd"
 import { Link, useNavigate } from "react-router-dom"
-import { loginUserApi } from "../../service/api.service"
+import { loginUserApi } from "../../service/api.user"
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 const LoginPage = () =>{

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Space, Table, Popconfirm, Drawer, message, Button} from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateModal from './update.userModal';
-import { deleteUserApi, handleUploadFile, updateAvatarUserApi } from '../../service/api.service'; 
+import { deleteUserApi, handleUploadFile, updateAvatarUserApi } from '../../service/api.user'; 
 
 const UserTable = (props) =>{
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
