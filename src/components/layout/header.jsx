@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutlined} from '@ant-design/icons';
+import React, { Children, useContext, useState } from 'react';
+import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, UserAddOutlined, AliwangwangOutlined, LogoutOutlined} from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 const Header = () =>{
 
   const {user, setUser} = useContext(AuthContext);
-
+  console.log('check data user ', user)
     const items = [
         {
           label: <Link to={'/'}>Home</Link>,
@@ -23,15 +23,29 @@ const Header = () =>{
           key: 'Book',
           icon: <BookOutlined />,
         },
+        (!(user.id)?
+          {
+            label: <Link to={'/login'}>Login</Link>,
+            key: 'Login',
+            icon: <LoginOutlined />
+          }:
+          {
+            label: <Link to={'/logout'}>Logout</Link>,
+            key: 'logout',
+            icon: <LogoutOutlined />
+          }
+        )
+        ,
         {
-          label: <Link to={'/login'}>Login</Link>,
-          key: 'Login',
-          icon: <LoginOutlined />
-        },
-        {
-          label: <Link to={'/register'}>Register</Link>,
-          key: 'Signin',
-          icon: <UserAddOutlined />
+          label: `Welcome ${user.fullName}`,
+          key: 'setting',
+          icon: <AliwangwangOutlined />,
+          Children:[
+            {
+              label:'Logout',
+              key: 'logout'
+            }
+          ]
         },
         
       ];

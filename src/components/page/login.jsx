@@ -12,12 +12,10 @@ const LoginPage = () =>{
     const { user, setUser } = useContext(AuthContext)
     const onFinish = async (values) => {
         setIsloading(true)
-        
         const res = await loginUserApi(values.email, values.password)
         if(res.data){
             message.success("login successfuly")
             setUser(res.data.user)
-            console.log('check user data ', user)
             localStorage.setItem('access_token', res.data.access_token)
             navigate('/users')
         }else{
