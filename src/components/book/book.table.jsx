@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Space, Table, Tag } from 'antd';
+import { Drawer, Space, Table, Tag } from 'antd';
 import { useEffect, useState } from 'react';
 import { getAllBook } from '../../service/api.book';
 import Link from 'antd/es/typography/Link';
@@ -9,6 +9,8 @@ const TableBoook = () => {
     const [current, setCurrent] = useState(1)
     const [pageSize, setPageSize] = useState(10)
     const [total, setTotal] = useState(0)
+    const [isDrawer, setIsDrawer] = useState(false)
+    const [dataDetail, setDataDetail] = useState({})
 
     const fetchAllBook = async () => {
         const res = await getAllBook(current, pageSize);
@@ -42,7 +44,10 @@ const TableBoook = () => {
       dataIndex: '_id',
       key: 'id',
       render: (_, record) => {
-        return <Link>{record._id}</Link>;
+        return <Link onClick={()=>{
+            setIsDrawer(true)
+            setDataDetail(record)
+        }} >{record._id}</Link>;
       },
     },
     {
@@ -110,6 +115,25 @@ const TableBoook = () => {
         } }
         onChange={onChange}
        />
+
+        <Drawer title="Basic Drawer" onClose={()=>{
+            setIsDrawer(false)
+        }} open={isDrawer}>
+            <div>ID: {dataDetail._id}</div>
+            <div>Title: {dataDetail.mainText}</div>
+            <div>Author: {dataDetail.author}</div>
+            <div>Genre: {dataDetail.category}</div>
+            <div>Price: {dataDetail.price}</div>
+            <div>Quantity: {dataDetail.quantity}</div>
+            <div>Sold: {dataDetail.sold}</div>
+            <div>Thumbnail: <br />
+                <img style={{
+                    width: '150px',
+                    height: '150px',
+                    overflow: 'hidden'
+                }} src={import.meta.env.VITE_IMAGE_URL_BOOK + dataDetail.thumbnail} alt="" />
+            </div>
+        </Drawer>
     </>
   );
 };
